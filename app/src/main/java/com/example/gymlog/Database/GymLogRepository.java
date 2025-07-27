@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.example.gymlog.Database.entities.GymLog;
+import com.example.gymlog.Database.entities.User;
 import com.example.gymlog.MainActivity;
 import com.google.android.material.tabs.TabLayout;
 
@@ -14,13 +15,15 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class GymLogRepository {
-    private GymLogDAO gymLogDAO;
+    private final GymLogDAO gymLogDAO;
+    private final UserDAO userDAO;
     private ArrayList<GymLog> allLogs;
 
     private static GymLogRepository repository;
     private GymLogRepository(Application application){
         GymLogDatabase db = GymLogDatabase.getDatabase(application);
         this.gymLogDAO = db.gymLogDAO();
+        this.userDAO = db.userDAO();
         this.allLogs = (ArrayList<GymLog>) this.gymLogDAO.getAllRecords();
     }
 
@@ -65,6 +68,14 @@ public class GymLogRepository {
     public void insertGymLog(GymLog gymLog){
         GymLogDatabase.databaseWriteExecuter.execute(() ->{
             gymLogDAO.insert(gymLog);
+                }
+
+        );
+    }
+
+    public void insertUser(User... user){
+        GymLogDatabase.databaseWriteExecuter.execute(() ->{
+                    userDAO.insert(user);
                 }
 
         );

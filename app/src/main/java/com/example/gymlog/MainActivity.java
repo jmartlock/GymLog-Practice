@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     double mWeight = 0.0;
     int mReps = 0;
 
+    //TODO: Add login information.
+    int loggedInUserId = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
         updateDisplay();
 
+        binding.exerciseInputEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateDisplay();
+            }
+        });
+
         binding.logButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 updateDisplay();
             }
         });
+
     }
 
 
@@ -59,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        GymLog log = new GymLog(mExercise, mWeight, mReps);
+        GymLog log = new GymLog(mExercise, mWeight, mReps, loggedInUserId);
         repository.insertGymLog(log);
     }
     private void updateDisplay(){
