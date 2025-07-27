@@ -10,12 +10,13 @@
     <TextView
         android:id="@+id/titleLoginTextView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_margin="16dip"
+        android:layout_height="155dip"
+        android:layout_margin="100dip"
         android:gravity="center"
         android:text="@string/login_welcome"
         android:textSize="42sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
