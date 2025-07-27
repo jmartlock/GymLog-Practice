@@ -7,7 +7,6 @@ import androidx.room.Query;
 
 import com.example.gymlog.Database.entities.GymLog;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -15,6 +14,6 @@ public interface GymLogDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE) // replaces old thing in database with new one, if has the same id
     void insert(GymLog gymLog);
 
-    @Query("Select * from " + GymLogDatabase.GYM_LOG_TABLE)
-    ArrayList<GymLog> getAllRecords();
+    @Query("SELECT * FROM " + GymLogDatabase.GYM_LOG_TABLE + " ORDER BY date DESC")
+    List<GymLog> getAllRecords();
 }
