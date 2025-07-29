@@ -7,17 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/logDisplayTextView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="70dip"
-        android:padding="36dp"
-        android:textSize="20sp"
-        android:text="Hello World!"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/logDisplayRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="90dp"
+        android:padding="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/gymlog_recycler_item" />
 
     <TextView
         android:id="@+id/exerciseLabelTextView"
@@ -28,12 +28,12 @@
         android:text="@string/exercise"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logDisplayTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/logDisplayRecyclerView" />
 
     <EditText
         android:id="@+id/exerciseInputEditText"
         android:layout_width="273dp"
-        android:layout_height="39dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:hint="@string/enter_an_exercise"
@@ -46,7 +46,7 @@
         android:id="@+id/weightLabelTextView"
         android:layout_width="100dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dip"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/weight"
         android:textSize="24sp"
@@ -56,7 +56,7 @@
     <EditText
         android:id="@+id/weightInputEditText"
         android:layout_width="273dp"
-        android:layout_height="39dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:hint="@string/enter_a_weight"
@@ -69,7 +69,7 @@
         android:id="@+id/repLabelTextView"
         android:layout_width="100dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dip"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/reps"
         android:textSize="24sp"
@@ -79,7 +79,7 @@
     <EditText
         android:id="@+id/repInputEditText"
         android:layout_width="273dp"
-        android:layout_height="39dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:hint="@string/enter_reps"
