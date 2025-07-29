@@ -3,6 +3,8 @@ package com.example.gymlog.Database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.gymlog.Database.entities.GymLog;
 import com.example.gymlog.Database.entities.User;
 import com.example.gymlog.MainActivity;
@@ -10,6 +12,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -81,18 +84,28 @@ public class GymLogRepository {
         );
     }
 
-    public User getUserByUserName(String username) {
-        Future<User> future = GymLogDatabase.databaseWriteExecuter.submit(
-                new Callable<User>() {
+    public LiveData<User> getUserByUserName(String username) {
+        return userDAO.getUserByUserName(username);
+    }
+
+    public LiveData<User> getUserByUserId(int userId) {
+        return userDAO.getUserByUserId(userId);
+    }
+
+    public ArrayList<GymLog> getAllLogsByUserId(int userId) {
+        Future<ArrayList<GymLog>> future = GymLogDatabase.databaseWriteExecuter.submit(
+                new Callable<ArrayList<GymLog>>() {
                     @Override
-                    public User call() throws Exception {
-                        return userDAO.getUserByUserName(username);
+                    public ArrayList<GymLog> call() throws Exception {
+                        return (ArrayList<GymLog>) gymLogDAO.getRecordsByUserId(userId);
                     }
-                });
+                }
+        );
         try{
-            future.get();
-        } catch (InterruptedException | ExecutionException e){
-            Log.i(MainActivity.TAG, "Problem when getting user by username");
+            return future.get();
+        }catch(InterruptedException | ExecutionException e){
+            e.printStackTrace();
+            Log.i(MainActivity.TAG, "Problem when getting all GymLogs in the repository");
         }
         return null;
     }
